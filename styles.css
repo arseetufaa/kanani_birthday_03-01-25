@@ -1,0 +1,748 @@
+:root {
+    --primary-color: #ff4b4b;
+    --secondary-color: #a18cd1;
+    --text-color: #ffffff;
+    --shadow-color: rgba(0, 0, 0, 0.3);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: linear-gradient(45deg, #ff9a9e, #fad0c4, #fad0c4, #a18cd1);
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
+    min-height: 100vh;
+    font-family: 'Arial', sans-serif;
+    overflow: hidden;
+    color: var(--text-color);
+}
+
+.game-container {
+    width: 100%;
+    height: 100vh;
+    position: relative;
+}
+
+/* Screens */
+.screen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 20px;
+}
+
+.screen.active {
+    display: flex;
+}
+
+/* Loading Screen */
+.heart-loader {
+    width: 50px;
+    height: 50px;
+    position: relative;
+    animation: heartbeat 1.2s infinite;
+    margin-bottom: 20px;
+}
+
+.heart-loader:before,
+.heart-loader:after {
+    content: '';
+    background: var(--primary-color);
+    width: 50px;
+    height: 80px;
+    border-radius: 50px 50px 0 0;
+    position: absolute;
+    left: 50%;
+    transform: rotate(-45deg);
+    transform-origin: 0 100%;
+}
+
+.heart-loader:after {
+    transform: rotate(45deg);
+    transform-origin: 100% 100%;
+}
+
+.loading-text {
+    font-size: 1.2em;
+    margin-top: 20px;
+    animation: pulse 1.5s infinite;
+}
+
+/* Start Screen */
+.start-message {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.start-message h1 {
+    font-size: 2.5em;
+    margin-bottom: 15px;
+    text-shadow: 2px 2px 4px var(--shadow-color);
+}
+
+.fancy-button {
+    padding: 15px 30px;
+    font-size: 1.2em;
+    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+    border: none;
+    border-radius: 25px;
+    color: white;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 5px 15px var(--shadow-color);
+}
+
+.fancy-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 7px 20px var(--shadow-color);
+}
+
+/* Game Screen */
+.progress-bar {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    max-width: 300px;
+    height: 20px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.progress {
+    width: 0%;
+    height: 100%;
+    background: var(--primary-color);
+    transition: width 0.5s ease;
+}
+
+.hearts-collected {
+    position: fixed;
+    top: 50px;
+    right: 20px;
+    font-size: 1.2em;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+/* Game Sections */
+.game-section {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+}
+
+.game-section h2 {
+    margin-bottom: 10px;
+    font-size: 2em;
+    text-shadow: 2px 2px 4px var(--shadow-color);
+    background: linear-gradient(45deg, #ff6b6b, #ffd93d);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: rainbow 3s linear infinite;
+}
+
+.game-description {
+    font-size: 1.2em;
+    margin-bottom: 20px;
+    color: rgba(255, 255, 255, 0.9);
+    text-shadow: 1px 1px 2px var(--shadow-color);
+}
+
+.birthday-note {
+    font-size: 1.1em;
+    margin: 15px 0;
+    color: #ffd700;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.birthday-message {
+    margin-top: 20px;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    backdrop-filter: blur(5px);
+    animation: fadeIn 0.5s ease;
+}
+
+@keyframes rainbow {
+    0% { filter: hue-rotate(0deg); }
+    100% { filter: hue-rotate(360deg); }
+}
+
+/* Memory Game */
+.memory-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+    gap: 10px;
+    margin: 0 auto;
+    max-width: 400px;
+}
+
+.memory-card {
+    aspect-ratio: 1;
+    background: white;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.memory-card:hover {
+    transform: scale(1.05);
+}
+
+/* Love Quiz */
+.quiz-container {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.quiz-option {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.quiz-option:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+/* Catch Birthday Wishes Game */
+.game-area {
+    width: 100%;
+    height: 400px;
+    position: relative;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(5px);
+}
+
+.birthday-basket {
+    width: 80px;
+    height: 80px;
+    font-size: 50px;
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    cursor: pointer;
+    transition: transform 0.2s ease;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    z-index: 10;
+    animation: basket-float 2s ease-in-out infinite;
+}
+
+.birthday-basket:hover {
+    transform: translateX(-50%) scale(1.1);
+}
+
+@keyframes basket-float {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(-10px); }
+}
+
+.falling-wish {
+    position: absolute;
+    pointer-events: none;
+    z-index: 5;
+    transition: transform 0.3s ease;
+}
+
+.wish-content {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 10px 20px;
+    border-radius: 20px;
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    animation: glow 1.5s ease-in-out infinite;
+}
+
+.wish-icon {
+    font-size: 24px;
+    animation: sparkle 1s ease infinite;
+}
+
+.wish-text {
+    color: #ff69b4;
+    font-weight: bold;
+    font-size: 16px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+@keyframes glow {
+    0%, 100% { box-shadow: 0 0 15px rgba(255, 215, 0, 0.5); }
+    50% { box-shadow: 0 0 25px rgba(255, 215, 0, 0.8); }
+}
+
+@keyframes sparkle {
+    0%, 100% { transform: scale(1) rotate(0deg); }
+    50% { transform: scale(1.2) rotate(180deg); }
+}
+
+.wish-celebration {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    pointer-events: none;
+    background: radial-gradient(circle, rgba(255,215,0,0.8) 0%, transparent 70%);
+    border-radius: 50%;
+    animation: celebrate 1s ease-out forwards;
+}
+
+@keyframes celebrate {
+    0% { transform: scale(0); opacity: 1; }
+    100% { transform: scale(2); opacity: 0; }
+}
+
+.wishes-collected {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+    margin: 20px 0;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    backdrop-filter: blur(5px);
+}
+
+.wish-item {
+    padding: 10px 20px;
+    background: linear-gradient(45deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.1));
+    border-radius: 20px;
+    color: #fff;
+    font-weight: bold;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    animation: popIn 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.wish-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+@keyframes popIn {
+    from { transform: scale(0); }
+    to { transform: scale(1); }
+}
+
+/* Photo Puzzle */
+.puzzle-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 5px;
+    margin: 0 auto;
+    max-width: 300px;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    position: relative;
+}
+
+.puzzle-grid::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to right, transparent 49%, rgba(255, 255, 255, 0.2) 50%, transparent 51%),
+                linear-gradient(to bottom, transparent 49%, rgba(255, 255, 255, 0.2) 50%, transparent 51%);
+    pointer-events: none;
+    z-index: 1;
+}
+
+.puzzle-piece {
+    aspect-ratio: 1;
+    background-color: white;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    width: 145px;
+    height: 145px;
+}
+
+.piece-label {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: rgba(255, 255, 255, 0.9);
+    color: var(--primary-color);
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 16px;
+    font-weight: bold;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    z-index: 2;
+    pointer-events: none;
+}
+
+.puzzle-piece.selected {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px var(--primary-color);
+    z-index: 3;
+}
+
+.puzzle-piece.hover {
+    transform: scale(1.02);
+    box-shadow: 0 5px 15px rgba(255, 255, 255, 0.3);
+}
+
+.puzzle-piece.selected .piece-label {
+    background: var(--primary-color);
+    color: white;
+}
+
+.puzzle-piece.empty {
+    display: none;
+}
+
+/* Add instruction text */
+.puzzle-grid::after {
+    content: 'Click two pieces to swap them!';
+    position: absolute;
+    bottom: -40px;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    color: white;
+    font-size: 1.2em;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+    animation: pulse 2s infinite;
+}
+
+.puzzle-complete {
+    width: 100%;
+    height: 100%;
+    aspect-ratio: 1;
+    background-size: cover;
+    background-position: center;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    animation: puzzleComplete 1s ease;
+}
+
+@keyframes puzzleComplete {
+    0% { transform: scale(0.8); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+/* Celebration Screen */
+.fireworks {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.final-message {
+    text-align: center;
+    max-width: 800px;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+}
+
+.birthday-crown {
+    font-size: 5em;
+    margin: 20px 0;
+    animation: float 3s ease-in-out infinite;
+}
+
+.collected-wishes {
+    margin: 30px 0;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 15px;
+}
+
+#wishes-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.birthday-cake {
+    margin-top: 40px;
+    position: relative;
+}
+
+.cake {
+    font-size: 5em;
+    animation: cake-bounce 2s ease-in-out infinite;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.cake:hover {
+    transform: scale(1.1);
+}
+
+@keyframes cake-bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-20px) rotate(5deg); }
+}
+
+.achievement-showcase {
+    margin: 30px 0;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+}
+
+.photo-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 15px;
+    margin-top: 30px;
+}
+
+/* Animations */
+@keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+@keyframes heartbeat {
+    0% { transform: scale(1); }
+    25% { transform: scale(1.1); }
+    50% { transform: scale(1); }
+    75% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+@keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.5; }
+    100% { opacity: 1; }
+}
+
+@keyframes firework {
+    0% {
+        transform: translate(-50%, -50%) scale(0);
+        opacity: 1;
+        background: radial-gradient(circle, var(--primary-color) 0%, transparent 100%);
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(2);
+        opacity: 0;
+        background: radial-gradient(circle, var(--primary-color) 0%, transparent 100%);
+    }
+}
+
+@keyframes float-heart {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-100vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+.firework {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    animation: firework 1s ease-out forwards;
+}
+
+.floating-heart {
+    position: fixed;
+    font-size: 24px;
+    pointer-events: none;
+    animation: float-heart 3s ease-out forwards;
+}
+
+.achievement {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 10px 20px;
+    border-radius: 20px;
+    margin: 10px 0;
+    backdrop-filter: blur(5px);
+    transition: transform 0.3s ease;
+}
+
+.achievement:hover {
+    transform: scale(1.05);
+}
+
+/* Memory Card Flip Animation */
+.memory-card {
+    transform-style: preserve-3d;
+    transition: transform 0.5s;
+}
+
+.memory-card.flipped {
+    transform: rotateY(180deg);
+}
+
+/* Quiz Option Animation */
+.quiz-option {
+    transform: translateX(-20px);
+    opacity: 0;
+    animation: slideIn 0.5s forwards;
+}
+
+@keyframes slideIn {
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* Catch Hearts Game */
+.falling-heart {
+    position: absolute;
+    font-size: 24px;
+    animation: fall 3s linear;
+}
+
+@keyframes fall {
+    to {
+        transform: translateY(100vh);
+    }
+}
+
+/* Photo Puzzle Piece Movement */
+.puzzle-piece {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.puzzle-piece:hover {
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+    z-index: 1;
+}
+
+/* Loading Animation */
+.heart-loader {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    animation: loader-spin 1.5s linear infinite;
+}
+
+@keyframes loader-spin {
+    0% { transform: rotate(0deg) scale(1); }
+    50% { transform: rotate(180deg) scale(1.2); }
+    100% { transform: rotate(360deg) scale(1); }
+}
+
+/* Progress Bar Animation */
+.progress {
+    position: relative;
+    overflow: hidden;
+}
+
+.progress::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.2),
+        transparent
+    );
+    animation: progress-shine 1.5s linear infinite;
+}
+
+@keyframes progress-shine {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .start-message h1 {
+        font-size: 2em;
+    }
+
+    .game-section {
+        padding: 10px;
+    }
+
+    .memory-grid {
+        grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
+    }
+
+    .game-area {
+        height: 250px;
+    }
+
+    .achievement-showcase {
+        margin: 20px 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .start-message h1 {
+        font-size: 1.5em;
+    }
+
+    .fancy-button {
+        padding: 12px 24px;
+        font-size: 1em;
+    }
+
+    .game-section h2 {
+        font-size: 1.4em;
+    }
+
+    .memory-grid {
+        grid-template-columns: repeat(auto-fit, minmax(50px, 1fr));
+    }
+}
+
+.hidden {
+    display: none !important;
+}

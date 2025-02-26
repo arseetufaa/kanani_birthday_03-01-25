@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>❤️ Birthday Adventure ❤️</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+</head>
+<body>
+    <div class="game-container">
+        <!-- Loading Screen -->
+        <div id="loading-screen" class="screen active">
+            <div class="heart-loader"></div>
+            <div class="loading-text">Loading your special surprise...</div>
+        </div>
+
+        <!-- Start Screen -->
+        <div id="start-screen" class="screen">
+            <div class="heart-container animate__animated animate__pulse animate__infinite">
+                <div class="heart"></div>
+            </div>
+            <div class="start-message animate__animated animate__fadeIn">
+                <h1>🎉 Happy Birthday My Love! 🎉</h1>
+                <p>I've prepared a special birthday adventure just for you...</p>
+                <p class="birthday-note">Each game holds a piece of my heart and a special message for you</p>
+                <button id="start-button" class="fancy-button">Begin Your Birthday Journey</button>
+            </div>
+        </div>
+
+        <!-- Game Levels -->
+        <div id="game-screen" class="screen">
+            <!-- Level Progress -->
+            <div class="progress-bar">
+                <div class="progress"></div>
+                <div class="hearts-collected">
+                    <span id="hearts-count">0</span> ❤️
+                </div>
+            </div>
+
+            <!-- Memory Game -->
+            <div id="memory-game" class="game-section hidden">
+                <h2>🎂 Birthday Memories Match 🎂</h2>
+                <p class="game-description">Match the birthday symbols to unlock a special message!</p>
+                <div class="memory-grid"></div>
+                <div class="birthday-message hidden"></div>
+            </div>
+
+            <!-- Love Quiz -->
+            <div id="love-quiz" class="game-section hidden">
+                <h2>🎈 Birthday Love Quiz 🎈</h2>
+                <p class="game-description">Answer these special birthday questions!</p>
+                <div class="quiz-container"></div>
+                <div class="birthday-message hidden"></div>
+            </div>
+
+            <!-- Catch Birthday Wishes -->
+            <div id="catch-hearts" class="game-section hidden">
+                <h2>🎁 Catch Birthday Wishes 🎁</h2>
+                <p class="game-description">Collect magical birthday wishes falling from the sky!</p>
+                <div class="wishes-collected"></div>
+                <div class="game-area">
+                    <div id="catcher" class="birthday-basket">🧺</div>
+                </div>
+                <div class="birthday-message hidden"></div>
+            </div>
+
+            <!-- Photo Puzzle -->
+            <div id="photo-puzzle" class="game-section hidden">
+                <h2>👑 Birthday Memory Puzzle 👑</h2>
+                <p class="game-description">Complete this special birthday picture!</p>
+                <div class="puzzle-grid"></div>
+                <div class="birthday-message hidden"></div>
+            </div>
+        </div>
+
+        <!-- Final Celebration -->
+        <div id="celebration-screen" class="screen">
+            <div class="fireworks"></div>
+            <div class="final-message animate__animated animate__fadeIn">
+                <h1>🎉 Happy Birthday, My Beautiful Queen! 🎉</h1>
+                <div class="birthday-crown">👑</div>
+                <div class="achievement-showcase">
+                    <h3>Your Birthday Achievements:</h3>
+                    <div id="achievements-list"></div>
+                </div>
+                <div class="collected-wishes">
+                    <h3>Birthday Wishes Collected:</h3>
+                    <div id="wishes-list" class="animate__animated animate__fadeIn"></div>
+                </div>
+                <div class="special-message">
+                    <h3>My Birthday Message to You:</h3>
+                    <p class="typing-text"></p>
+                </div>
+                <div class="birthday-cake">
+                    <div class="cake">🎂</div>
+                    <p>Make a wish!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sound Effects -->
+    <audio id="bgMusic" loop>
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mp3">
+    </audio>
+    <audio id="successSound">
+        <source src="https://assets.mixkit.co/sfx/preview/mixkit-achievement-bell-600.mp3" type="audio/mp3">
+    </audio>
+    <audio id="matchSound">
+        <source src="https://assets.mixkit.co/sfx/preview/mixkit-fairy-arcade-sparkle-866.mp3" type="audio/mp3">
+    </audio>
+
+    <script src="script.js"></script>
+</body>
+</html>
